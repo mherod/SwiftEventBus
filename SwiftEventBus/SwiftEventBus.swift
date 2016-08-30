@@ -23,7 +23,7 @@ open class SwiftEventBus {
         NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: nil)
     }
     
-    open class func post(message: String, sender: AnyObject?) {
+    open class func post(message: String, sender: Any?) {
         NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: sender)
     }
     
@@ -35,7 +35,7 @@ open class SwiftEventBus {
         NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: nil, userInfo: userInfo)
     }
     
-    open class func post(message: String, sender: AnyObject?, userInfo: [AnyHashable: Any]?) {
+    open class func post(message: String, sender: Any?, userInfo: [AnyHashable: Any]?) {
         NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: sender, userInfo: userInfo)
     }
     
@@ -45,7 +45,7 @@ open class SwiftEventBus {
         }
     }
     
-    open class func postToMainThread(message: String, sender: AnyObject?) {
+    open class func postToMainThread(message: String, sender: Any?) {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: sender)
         }
@@ -63,7 +63,7 @@ open class SwiftEventBus {
         }
     }
     
-    open class func postToMainThread(message: String, sender: AnyObject?, userInfo: [AnyHashable: Any]?) {
+    open class func postToMainThread(message: String, sender: Any?, userInfo: [AnyHashable: Any]?) {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: sender, userInfo: userInfo)
         }
@@ -75,7 +75,7 @@ open class SwiftEventBus {
     // Subscribe
     ////////////////////////////////////
     
-    open class func on(notify target: AnyObject, name: String, sender: AnyObject?, queue: OperationQueue?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
+    open class func on(notify target: AnyObject, name: String, sender: Any?, queue: OperationQueue?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
         let id = UInt(bitPattern: ObjectIdentifier(target))
         let observer = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: name), object: sender, queue: queue, using: handler)
         let namedObserver = NamedObserver(observer: observer, name: name)
@@ -95,7 +95,7 @@ open class SwiftEventBus {
         return SwiftEventBus.on(notify: target, name: name, sender: nil, queue: OperationQueue.main, handler: handler)
     }
     
-    open class func onMainThread(notify target: AnyObject, name: String, sender: AnyObject?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
+    open class func onMainThread(notify target: AnyObject, name: String, sender: Any?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
         return SwiftEventBus.on(notify: target, name: name, sender: sender, queue: OperationQueue.main, handler: handler)
     }
     
@@ -103,7 +103,7 @@ open class SwiftEventBus {
         return SwiftEventBus.on(notify: target, name: name, sender: nil, queue: OperationQueue(), handler: handler)
     }
     
-    open class func onBackgroundThread(notify target: AnyObject, name: String, sender: AnyObject?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
+    open class func onBackgroundThread(notify target: AnyObject, name: String, sender: Any?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
         return SwiftEventBus.on(notify: target, name: name, sender: sender, queue: OperationQueue(), handler: handler)
     }
     
