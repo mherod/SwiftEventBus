@@ -19,53 +19,53 @@ open class SwiftEventBus {
     // Publish
     ////////////////////////////////////
     
-    open class func post(_ name: String) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: name), object: nil)
+    open class func post(message: String) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: nil)
     }
     
-    open class func post(_ name: String, sender: AnyObject?) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: name), object: sender)
+    open class func post(message: String, sender: AnyObject?) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: sender)
     }
     
-    open class func post(_ name: String, sender: NSObject?) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: name), object: sender)
+    open class func post(message: String, sender: NSObject?) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: sender)
     }
     
-    open class func post(_ name: String, userInfo: [NSObject : AnyObject]?) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: name), object: nil, userInfo: userInfo)
+    open class func post(message: String, userInfo: [AnyHashable: Any]?) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: nil, userInfo: userInfo)
     }
     
-    open class func post(_ name: String, sender: AnyObject?, userInfo: [NSObject : AnyObject]?) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: name), object: sender, userInfo: userInfo)
+    open class func post(message: String, sender: AnyObject?, userInfo: [AnyHashable: Any]?) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: sender, userInfo: userInfo)
     }
     
-    open class func postToMainThread(_ name: String) {
+    open class func postToMainThread(message: String) {
         DispatchQueue.main.async {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: name), object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: nil)
         }
     }
     
-    open class func postToMainThread(_ name: String, sender: AnyObject?) {
+    open class func postToMainThread(message: String, sender: AnyObject?) {
         DispatchQueue.main.async {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: name), object: sender)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: sender)
         }
     }
     
-    open class func postToMainThread(_ name: String, sender: NSObject?) {
+    open class func postToMainThread(message: String, sender: NSObject?) {
         DispatchQueue.main.async {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: name), object: sender)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: sender)
         }
     }
     
-    open class func postToMainThread(_ name: String, userInfo: [NSObject : AnyObject]?) {
+    open class func postToMainThread(message: String, userInfo: [AnyHashable: Any]?) {
         DispatchQueue.main.async {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: name), object: nil, userInfo: userInfo)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: nil, userInfo: userInfo)
         }
     }
     
-    open class func postToMainThread(_ name: String, sender: AnyObject?, userInfo: [NSObject : AnyObject]?) {
+    open class func postToMainThread(message: String, sender: AnyObject?, userInfo: [AnyHashable: Any]?) {
         DispatchQueue.main.async {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: name), object: sender, userInfo: userInfo)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: message), object: sender, userInfo: userInfo)
         }
     }
     
@@ -75,7 +75,7 @@ open class SwiftEventBus {
     // Subscribe
     ////////////////////////////////////
     
-    open class func on(_ target: AnyObject, name: String, sender: AnyObject?, queue: OperationQueue?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
+    open class func on(notify target: AnyObject, name: String, sender: AnyObject?, queue: OperationQueue?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
         let id = UInt(bitPattern: ObjectIdentifier(target))
         let observer = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: name), object: sender, queue: queue, using: handler)
         let namedObserver = NamedObserver(observer: observer, name: name)
@@ -91,20 +91,20 @@ open class SwiftEventBus {
         return observer
     }
     
-    open class func onMainThread(_ target: AnyObject, name: String, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
-        return SwiftEventBus.on(target, name: name, sender: nil, queue: OperationQueue.main, handler: handler)
+    open class func onMainThread(notify target: AnyObject, name: String, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
+        return SwiftEventBus.on(notify: target, name: name, sender: nil, queue: OperationQueue.main, handler: handler)
     }
     
-    open class func onMainThread(_ target: AnyObject, name: String, sender: AnyObject?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
-        return SwiftEventBus.on(target, name: name, sender: sender, queue: OperationQueue.main, handler: handler)
+    open class func onMainThread(notify target: AnyObject, name: String, sender: AnyObject?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
+        return SwiftEventBus.on(notify: target, name: name, sender: sender, queue: OperationQueue.main, handler: handler)
     }
     
-    open class func onBackgroundThread(_ target: AnyObject, name: String, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
-        return SwiftEventBus.on(target, name: name, sender: nil, queue: OperationQueue(), handler: handler)
+    open class func onBackgroundThread(notify target: AnyObject, name: String, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
+        return SwiftEventBus.on(notify: target, name: name, sender: nil, queue: OperationQueue(), handler: handler)
     }
     
-    open class func onBackgroundThread(_ target: AnyObject, name: String, sender: AnyObject?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
-        return SwiftEventBus.on(target, name: name, sender: sender, queue: OperationQueue(), handler: handler)
+    open class func onBackgroundThread(notify target: AnyObject, name: String, sender: AnyObject?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
+        return SwiftEventBus.on(notify: target, name: name, sender: sender, queue: OperationQueue(), handler: handler)
     }
     
     ////////////////////////////////////
