@@ -368,6 +368,7 @@
 				TargetAttributes = {
 					613A66821A85BA390046DEB8 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = N4PRNQLJ4L;
 					};
 					6195C5421A85B9AB00E83058 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -375,8 +376,9 @@
 					};
 					6195C54D1A85B9AB00E83058 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 337Z8P6WA4;
+						DevelopmentTeam = N4PRNQLJ4L;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -543,6 +545,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = N4PRNQLJ4L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods",
@@ -563,6 +566,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = N4PRNQLJ4L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods",
@@ -718,7 +722,8 @@
 		6195C55D1A85B9AB00E83058 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 337Z8P6WA4;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N4PRNQLJ4L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -738,7 +743,8 @@
 		6195C55E1A85B9AB00E83058 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 337Z8P6WA4;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N4PRNQLJ4L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
