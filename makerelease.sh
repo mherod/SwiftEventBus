@@ -1,2 +1,2 @@
 carthage build --no-skip-current
-carthage archive SwiftEventBus
+source makearchive.sh
