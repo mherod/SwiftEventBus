@@ -75,7 +75,7 @@ open class SwiftEventBus {
     // Subscribe
     ////////////////////////////////////
     
-    open class func on(notify target: AnyObject, name: String, sender: Any?, queue: OperationQueue?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
+    open class func on(notify target: AnyObject, name: String, sender: Any?, queue: OperationQueue?, handler: @escaping ((Notification!) -> Void)) -> NSObjectProtocol {
         let id = UInt(bitPattern: ObjectIdentifier(target))
         let observer = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: name), object: sender, queue: queue, using: handler)
         let namedObserver = NamedObserver(observer: observer, name: name)
@@ -91,19 +91,19 @@ open class SwiftEventBus {
         return observer
     }
     
-    open class func onMainThread(notify target: AnyObject, name: String, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
+    open class func onMainThread(notify target: AnyObject, name: String, handler: @escaping ((Notification!) -> Void)) -> NSObjectProtocol {
         return SwiftEventBus.on(notify: target, name: name, sender: nil, queue: OperationQueue.main, handler: handler)
     }
     
-    open class func onMainThread(notify target: AnyObject, name: String, sender: Any?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
+    open class func onMainThread(notify target: AnyObject, name: String, sender: Any?, handler: @escaping ((Notification!) -> Void)) -> NSObjectProtocol {
         return SwiftEventBus.on(notify: target, name: name, sender: sender, queue: OperationQueue.main, handler: handler)
     }
     
-    open class func onBackgroundThread(notify target: AnyObject, name: String, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
+    open class func onBackgroundThread(notify target: AnyObject, name: String, handler: @escaping ((Notification!) -> Void)) -> NSObjectProtocol {
         return SwiftEventBus.on(notify: target, name: name, sender: nil, queue: OperationQueue(), handler: handler)
     }
     
-    open class func onBackgroundThread(notify target: AnyObject, name: String, sender: Any?, handler: ((Notification!) -> Void)) -> NSObjectProtocol {
+    open class func onBackgroundThread(notify target: AnyObject, name: String, sender: Any?, handler: @escaping ((Notification!) -> Void)) -> NSObjectProtocol {
         return SwiftEventBus.on(notify: target, name: name, sender: sender, queue: OperationQueue(), handler: handler)
     }
     
