@@ -17,12 +17,12 @@ Allows publish-subscribe-style communication between components without requirin
 ### Cocoapods
 
 ```bash
-pod 'SwiftEventBus', :git => 'https://github.com/cesarferreira/SwiftEventBus.git'
+pod 'SwiftEventBus', :git => 'https://github.com/mherod/SwiftEventBus.git'
 ```
 
 ### Carthage
 ```bash
-github "cesarferreira/SwiftEventBus" == 1.1.0
+github "mherod/SwiftEventBus"
 ```
 
 ## Usage
